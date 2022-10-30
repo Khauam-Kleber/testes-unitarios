@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TodoService } from './todo.service';
 
-// Fake todos and response object
+// Fake "todos" and response object
 const todos = [
   'shop groceries',
   'mow the lawn',

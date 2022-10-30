@@ -1,0 +1,25 @@
+<form id="loginForm" class="form-container center margin-top" [formGroup]="form" (ngSubmit)="exibirForm()" >
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome:</mat-label>
+          <input matInput  formControlName="nome" required>
+        <mat-error *ngIf="formControls.nome.errors && formControls.nome.errors.required">Escreva seu Telefone</mat-error>
+      </mat-form-field>
+    </div>
+    <div >
+      <mat-form-field appearance="fill">
+        <mat-label>Telefone (apenas números):</mat-label>
+          <input type='number' matInput  formControlName="telefone" required>
+        <mat-error *ngIf="formControls.telefone.errors && formControls.telefone.errors.required">Escreva seu Telefone</mat-error>
+      </mat-form-field>
+    </div>  
+    <div class="margin-top">
+      <!-- <button  (click)="limparForm()">
+        Limpar
+      </button> -->
+  
+      <button class="margin-left" type="submit" >
+        Cadastrar
+      </button>
+    </div>  
+  </form>
