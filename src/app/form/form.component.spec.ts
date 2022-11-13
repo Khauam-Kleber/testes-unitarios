@@ -45,5 +45,37 @@ describe('FormComponent', () => {
     expect(userNameValueFromGroup.errors.required).toBeTruthy();
   })
 
+  it('Verificar valor do nome apos colocar algum valor e validação', ( ) => {
+    //buscando o input do form
+    const loginFormNameElement: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('#loginForm').querySelectorAll('input')[0];
+    //atribuindo valor ao input
+    loginFormNameElement.value = "joao da silva"; //se tirar esse valor vai estourar erro pois o valor é requirido 
+    //disparando evento de mudança de valor
+    loginFormNameElement.dispatchEvent(new Event('input'));
+    //detectando as mudanças
+    fixture.detectChanges();
+
+    //apos disparar eventos comparar valores
+    fixture.whenStable().then(() => {
+      const userNameValueFromGroup = component.form.get('nome');
+      expect(loginFormNameElement.value).toEqual(userNameValueFromGroup.value);
+      expect(userNameValueFromGroup.errors).toBeNull();
+    })
+  });
+
+  it('verificar se o form é valido e esta completamente preenchido', () => {
+    const loginFormNameElement: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('#loginForm').querySelectorAll('input')[0];
+    const loginFormTelElement: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('#loginForm').querySelectorAll('input')[1];
+    loginFormNameElement.value = "joao da silva";
+    loginFormTelElement.value = "111101211";
+    loginFormNameElement.dispatchEvent(new Event('input'));
+    loginFormTelElement.dispatchEvent(new Event('input'));
+    const isLoginFormValid = component.form.valid;
+    fixture.whenStable().then(() => {
+      expect(isLoginFormValid).toBeTruthy();
+    })
+  })
+  
+
 
 });
